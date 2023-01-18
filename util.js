@@ -9,9 +9,14 @@ const filterByPriceInput =
 	document.getElementsByClassName('filterByPriceInput');
 const filterByPriceBtn = document.getElementById('filterByPriceBtn');
 const filterByNameInput = document.getElementById('filterByNameInput');
+const timerMinutes = document.getElementById('minutes');
+const timerSeconds = document.getElementById('seconds');
+const muteBtn = document.getElementById('mute');
+let muted = true;
 let productListHtml,
 	tempProductArray,
 	productData,
+	debounce = '',
 	sortValue = 'price';
 
 function jsonFormating(nonFormatedObj) {
@@ -36,14 +41,25 @@ function renderPage(items) {
 	productContainer.innerHTML = generatedHTML;
 }
 
+function mute() {
+	if (muted) {
+		muteBtn.textContent = 'Unmute';
+		muted = false;
+	} else {
+		muteBtn.textContent = 'Mute';
+		muted = true;
+	}
+}
+
 function decrement(event) {
-	if (event.path[1].childNodes[3].value > 0) {
-		event.path[1].childNodes[3].value--;
+	console.log();
+	if (event.srcElement.nextElementSibling.value > 0) {
+		event.srcElement.nextElementSibling.value--;
 	}
 }
 
 function incrament(event) {
-	event.path[1].childNodes[3].value++;
+	event.srcElement.offsetParent.childNodes[3].value++;
 }
 
 function filterByPriceFN(productList, nimNumber, maxNumber) {
@@ -80,4 +96,18 @@ function showAllProducts() {
 		filterByPriceInput[1].value =
 		filterByNameInput.value =
 			'';
+}
+
+function headerTimer() {
+	let seconds = 0,
+		minutes = 0;
+	setInterval(() => {
+		if (seconds >= 60) {
+			seconds = 0;
+			minutes++;
+			timerMinutes.textContent = minutes < 10 ? '0' + minutes : minutes;
+		}
+		timerSeconds.innerText = seconds < 10 ? '0' + seconds : seconds;
+		seconds++;
+	}, 1000);
 }

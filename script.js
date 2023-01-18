@@ -4,6 +4,7 @@ fetch(
 	.then((response) => response.json())
 	.then((data) => {
 		productData = data;
+		tempProductArray = productData;
 		renderPage(productData);
 	});
 
@@ -31,6 +32,19 @@ filterByPriceBtn.addEventListener('click', () => {
 
 filterByNameInput.addEventListener('keyup', (e) => {
 	let keyPressed = e.target.value;
-	keyPressed = keyPressed.toLowerCase();
-	filterByNameFN(productData, keyPressed);
+	clearTimeout(debounce);
+	debounce = setTimeout(() => {
+		keyPressed = keyPressed.toLowerCase();
+		filterByNameFN(productData, keyPressed);
+	}, 300);
+});
+
+headerTimer();
+
+document.addEventListener('click', () => {
+	let soundToPlay = Math.floor(Math.random() * 4);
+	let sound = new Audio('./sounds/' + soundToPlay + '.mp3');
+	if (muted) {
+		sound.play();
+	}
 });

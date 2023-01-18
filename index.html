@@ -16,6 +16,14 @@
 			rel="stylesheet"
 			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
 		/>
+		<!-- google fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap"
+			rel="stylesheet"
+		/>
+
 		<link rel="stylesheet" href="styles.css" />
 		<title>teaShop</title>
 	</head>
@@ -23,6 +31,10 @@
 		<section id="header">
 			<h4 class="headerName">Tea Shop</h4>
 			<button id="showFiltersBtn">show filters</button>
+			<button id="mute" onclick="mute()">Shut Up!!</button>
+			<div id="headerTimer">
+				<span id="minutes">00</span> : <span id="seconds">00</span>
+			</div>
 		</section>
 
 		<section id="filtersSection" class="filtersSectionClass">
